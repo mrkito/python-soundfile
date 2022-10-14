@@ -725,7 +725,7 @@ class SoundFile(object):
             self._check_if_closed()
             err = _snd.sf_set_string(self._file, _str_types[name],
                                      value.encode())
-            _error_check(err)
+            # _error_check(err)
         else:
             object.__setattr__(self, name, value)
 
@@ -796,7 +796,7 @@ class SoundFile(object):
         """
         self._check_if_closed()
         position = _snd.sf_seek(self._file, frames, whence)
-        _error_check(self._errorcode)
+        # _error_check(self._errorcode)
         return position
 
     def tell(self):
@@ -1182,7 +1182,7 @@ class SoundFile(object):
             self.flush()
             err = _snd.sf_close(self._file)
             self._file = None
-            _error_check(err)
+            # _error_check(err)
 
     def _open(self, file, mode_int, closefd):
         """Call the appropriate sf_open*() function from libsndfile."""
@@ -1348,7 +1348,7 @@ class SoundFile(object):
             curr = self.tell()
         func = getattr(_snd, 'sf_' + action + 'f_' + ctype)
         frames = func(self._file, data, frames)
-        _error_check(self._errorcode)
+        # _error_check(self._errorcode)
         if self.seekable():
             self.seek(curr + frames, SEEK_SET)  # Update read & write position
         return frames
